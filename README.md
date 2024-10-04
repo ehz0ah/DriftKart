@@ -20,7 +20,7 @@ This project demonstrates the creation of a robot controlled by an Xbox controll
 
 ## Project Structure
 
-`ESP32`:
+`ESP`:
   - Code to connect the Xbox controller to ESP32, process signals, and transmit commands over UART.
 
 `KL25Z`:
