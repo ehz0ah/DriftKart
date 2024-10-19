@@ -9,7 +9,8 @@ typedef enum
 {
 	RED,
 	GREEN,
-	BLUE
+	BLUE,
+	OFF
 } color_t;
 
 

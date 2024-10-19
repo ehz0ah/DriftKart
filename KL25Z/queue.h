@@ -1,8 +1,13 @@
-#include "MKL25Z4.h"                    // Device header
+#include "MKL25Z4.h" // Device header
+#include "lib.h"
 
 #define BUFFER_SIZE 64
 
-typedef struct {
+#define FULL_SPEED 7500
+#define SLOW_SPEED 4500  // 60%
+
+typedef struct
+{
 	volatile uint8_t buffer[BUFFER_SIZE];
 	volatile uint16_t head;
 	volatile uint16_t tail;
@@ -18,3 +23,5 @@ int isFull(CircularBuffer *q);
 void buffer_put(CircularBuffer *q, uint8_t data);
 
 uint8_t buffer_get(CircularBuffer *q);
+
+void parseData(CircularBuffer* queue, int* speed, uint8_t* command, uint8_t* spin, osEventFlagsId_t runEndEvent);
