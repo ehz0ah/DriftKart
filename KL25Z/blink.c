@@ -1,51 +1,74 @@
-#include "MKL25Z4.h" // Device header
 #include "blink.h"
 
-void initGPIO(void)
-{
-	// Enable Clock to PORTB and PORTD
-	SIM->SCGC5 |= ((SIM_SCGC5_PORTB_MASK) | (SIM_SCGC5_PORTD_MASK));
-
-	// Configure MUX settings to make all 3 pins GPIO
-	PORTB->PCR[RED_LED] &= ~PORT_PCR_MUX_MASK; // We are accessing the pin control register for the RED_LED and clear MUX bits
-	PORTB->PCR[RED_LED] |= PORT_PCR_MUX(1);	   // sets MUX (multiplexer) to be 1 for GPIO
-
-	PORTB->PCR[GREEN_LED] &= ~PORT_PCR_MUX_MASK;
-	PORTB->PCR[GREEN_LED] |= PORT_PCR_MUX(1);
-
-	PORTD->PCR[BLUE_LED] &= ~PORT_PCR_MUX_MASK;
-	PORTD->PCR[BLUE_LED] |= PORT_PCR_MUX(1);
-
-	// Set Data Direction Registers for PortB and PortD
-	PTB->PDDR |= (MASK(RED_LED) | MASK(GREEN_LED)); // Data Direction Registers for Port B
-	PTD->PDDR |= MASK(BLUE_LED);					// Sets 1 to configure it to output
+// Semaphore variablesosSemaphoreId_t greenledSem;
+volatile int blinkingActive = 1;
+volatile int redFrequency = 500;
+// Array to store the pin numbers of green LEDs
+int green_led_array[10] = {GREEN_LED1, GREEN_LED2, GREEN_LED3, GREEN_LED4, 
+                           GREEN_LED5, GREEN_LED6, GREEN_LED7, GREEN_LED8,
+														GREEN_LED9, GREEN_LED10};
+void InitGPIO(void) {
+  // Enable Clock to PortE    
+	SIM->SCGC5 |= SIM_SCGC5_PORTE_MASK;
+  // Configure MUX settings for RED and GREEN LEDs as GPIO
+  PORTE->PCR[RED_LED] &= ~PORT_PCR_MUX_MASK; 
+	PORTE->PCR[RED_LED] |= PORT_PCR_MUX(1);  // PortE Pin 1 as GPIO
+	
+	for (int i = 0; i < GREEN_LED_COUNT; i++) {
+		PORTE->PCR[green_led_array[i]] &= ~PORT_PCR_MUX_MASK;
+		PORTE->PCR[green_led_array[i]] |= PORT_PCR_MUX(1);  // Set as GPIO
+	}
+	
+	// Set RED and GREEN LEDs as output    PTE->PDDR |= MASK(RED_LED);
+	for (int i = 0; i < GREEN_LED_COUNT; i++) {   
+		PTE->PDDR |= MASK(green_led_array[i]);
+	}
+	
+	// Turn off all LEDs initially    PTE->PCOR |= MASK(RED_LED);
+	for (int i = 0; i < GREEN_LED_COUNT; i++) { 
+		PTE->PCOR |= MASK(green_led_array[i]);
+	}
+}
+void delay(uint32_t delayTime) {  
+  osDelay(delayTime);  // Use CMSIS-RTOS osDelay
 }
 
-void led_control(color_t color)
-{
-	// Turn off all LEDs first
-	PTB->PCOR = MASK(RED_LED) | MASK(GREEN_LED); // Port clear Output Register for Port B, so we set high to these bits
-	PTD->PCOR = MASK(BLUE_LED);
-
-	// Turn on the selected LED
-	switch (color)
-	{
-	case RED:
-		PTB->PSOR = MASK(GREEN_LED); // Port Set Output Register, also write high since its set register
-		PTD->PSOR = MASK(BLUE_LED);
-		break;
-	case GREEN:
-		PTB->PSOR = MASK(RED_LED);
-		PTD->PSOR = MASK(BLUE_LED);
-		break;
-	case BLUE:
-		PTB->PSOR = MASK(RED_LED);
-		PTB->PSOR = MASK(GREEN_LED);
-		break;
-	case OFF:
-		PTB->PSOR = MASK(GREEN_LED);
-		PTD->PSOR = MASK(BLUE_LED);
-		PTB->PSOR = MASK(RED_LED);
-		break;
-	}
+void checkFlag(void *argument) {  
+  int count = 1;
+  while (1) {  
+		osSemaphoreRelease(greenledSem);  // Release the green LED semaphore
+    if (count) {  
+			redFrequency = 500;
+    } else {    
+			redFrequency = 250;
+    }   
+		count = (count + 1) % 2;
+    delay(5500);  // 5.5-second delay    }
+}
+	
+void BlinkRedLED(void *argument) {  
+  while (1) {
+		PTE->PSOR = MASK(RED_LED);  // Turn on RED LED        delay(redFrequency);  // Delay based on frequency
+		PTE->PCOR = MASK(RED_LED);  // Turn off RED LED
+		delay(redFrequency);  // Delay based on frequency    }
+}
+void onGreen() {  
+		for (int i = 0; i < GREEN_LED_COUNT; i++) {
+        PTE->PSOR |= MASK(green_led_array[i]);  // Turn on all GREEN LEDs    }
+}
+void offGreen() {    for (int i = 0; i < GREEN_LED_COUNT; i++) {
+        PTE->PCOR |= MASK(green_led_array[i]);  // Turn off all GREEN LEDs    }
+}
+void BlinkGreenLED(void *argument) {    while (1) {
+        osSemaphoreAcquire(greenledSem, osWaitForever);  // Wait for semaphore        int currentLEDIndex = 0;
+        offGreen();        blinkingActive = 1;
+        while (blinkingActive) {
+            PTE->PSOR = MASK(green_led_array[currentLEDIndex]);  // Turn on current LED            delay(100);  // 100ms delay
+            PTE->PCOR = MASK(green_led_array[currentLEDIndex]);  // Turn off current LED
+            currentLEDIndex = (currentLEDIndex + 1) % GREEN_LED_COUNT;  // Move to next LED        }
+        onGreen();  // Turn on all LEDs at the end    }
+}
+void LightGreenLED(void *argument) {    while (1) {
+        osSemaphoreAcquire(greenledSem, osWaitForever);  // Wait for semaphore        blinkingActive = 0;
+        onGreen();  // Turn on all GREEN LEDs    }
 }

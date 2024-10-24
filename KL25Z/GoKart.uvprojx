@@ -383,11 +383,6 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>blink.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\blink.c</FilePath>
-            </File>
-            <File>
               <FileName>queue.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\queue.c</FilePath>
@@ -396,11 +391,6 @@
               <FileName>queue.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\queue.h</FilePath>
-            </File>
-            <File>
-              <FileName>blink.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\blink.h</FilePath>
             </File>
             <File>
               <FileName>uart.c</FileName>
@@ -431,6 +421,16 @@
               <FileName>lib.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\lib.h</FilePath>
+            </File>
+            <File>
+              <FileName>buzzer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\buzzer.c</FilePath>
+            </File>
+            <File>
+              <FileName>buzzer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\buzzer.h</FilePath>
             </File>
           </Files>
         </Group>

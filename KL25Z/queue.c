@@ -15,12 +15,18 @@ void initQueue(CircularBuffer *q)
 
 int isEmpty(CircularBuffer *q)
 {
-	return q->size == 0;
+	if ((q->size == 0) && (q->head == q->tail)) {
+		return 1;
+	}
+	return 0;
 }
 
 int isFull(CircularBuffer *q)
 {
-	return q->size == BUFFER_SIZE;
+	if ((q->size == BUFFER_SIZE) && (q->head == q->tail)) {
+		return 1;
+	}
+	return 0;
 }
 
 void buffer_put(CircularBuffer *q, uint8_t data)
@@ -36,7 +42,7 @@ void buffer_put(CircularBuffer *q, uint8_t data)
 
 uint8_t buffer_get(CircularBuffer *q)
 {
-	uint8_t data;
+	uint8_t data = 0;
 	if (!isEmpty(q))
 	{
 		data = q->buffer[q->tail];
@@ -49,10 +55,10 @@ uint8_t buffer_get(CircularBuffer *q)
 
 void parseData(CircularBuffer* queue, int* speed, uint8_t* command, uint8_t* spin, osEventFlagsId_t runEndEvent) {
 	uint8_t data = buffer_get(queue);
-	*command = (data >> 4);
-	uint8_t throttle = (data & MASK(3));
-	uint8_t run = (data & MASK(2));
-	*spin = (data & MASK(1));
+	*command = (data >> 4) & 0x0F;
+	uint8_t throttle = (data >> 3) & 0x01;
+	uint8_t run = (data >> 2) & 0x01;
+	*spin = (data >> 1) & 0x01;
 	if (throttle) {
 		*speed = FULL_SPEED;
 	} else {

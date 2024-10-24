@@ -2,57 +2,92 @@
 #include "queue.h"
 #include "uart.h"
 #include "pwm.h"
+#include "buzzer.h"
 
-int speed = 0;
-uint8_t command = 0;
-uint8_t spin = 0;
+volatile uint8_t running;  // Used for LED thread
 
 osEventFlagsId_t runEndEvent;
 
-CircularBuffer rx_queue; // Global buffer instance
+osMessageQueueId_t motorMessage, robotMessage;
+
+typedef struct {
+	uint8_t command;
+	uint8_t throttle;
+	uint8_t spin;
+} dataPacket;
 
 void UART2_IRQHandler(void) {
-	if (UART2->S1 & UART_S1_RDRF_MASK) {  // Check if receive data							 
-		buffer_put(&rx_queue, UART2->D); // Insert into circular buffer
+	NVIC_ClearPendingIRQ(UART2_IRQn);
+	if (UART2->S1 & UART_S1_RDRF_MASK) {  // Check if receive data
+		dataPacket data;
+		uint8_t rxData = UART2->D;
+		data.command = rxData & 0x0F;
+		data.throttle = rxData & 0x10;
+		data.spin = rxData & 0x20;
+		osMessageQueuePut(robotMessage, &data, NULL, 0); // Send data to main robot control to execute command
 	}
+	PORTD->ISFR = 0xffffffff;
 }
 
 void parser_thread(void* argument) {
+	dataPacket rxData;
 	for (;;) {
-		parseData(&rx_queue, &speed, &command, &spin, runEndEvent);
+		osMessageQueueGet(robotMessage, &rxData, NULL, osWaitForever);
+		if (rxData.command == 0x00) {
+			running = 0;
+		} else {
+			running = 1;
+		}
+		
+		if (1) {   // suppose to check rxData.end == 1 (not configured)
+			osEventFlagsClear(runEndEvent, 0x01);
+			osEventFlagsSet(runEndEvent, 0x02);  // bit 1 controls playing of end music
+		} else {
+			osEventFlagsClear(runEndEvent, 0x02);
+			osEventFlagsSet(runEndEvent, 0x01);  // bit 0 controls playing main music
+		}
+		
+		osMessageQueuePut(motorMessage, &rxData, NULL, 0);
 	}
 }
 
 void pwm_thread(void* argument) {
+	dataPacket rxData;
 	for (;;) {
-		move(command, spin, speed);
+		osMessageQueueGet(motorMessage, &rxData, NULL, osWaitForever);
+		int speed = rxData.throttle ? FULL_SPEED : SLOW_SPEED;
+		move(rxData.command, rxData.spin, speed);
 	}
 }
 
-const osThreadAttr_t parser_thread_attr = {
-  .priority = osPriorityHigh                      
-};
+void run_music_thread(void* argument) {
+	for(;;) {
+			playMelody();
+	}
+}
 
-const osThreadAttr_t pwm_thread_attr = {
-  .priority = osPriorityHigh                      
-};
-
+void end_music_thread(void* argument) {
+	for(;;) {
+			playEndMusic();
+	}
+}
 
 int main(void) {
 	
 	SystemCoreClockUpdate();
-	//SystemInit();
-	initQueue(&rx_queue);
 	initUART2(BAUD_RATE);
 	initPWM();
 	
 	osKernelInitialize();
-	runEndEvent = osEventFlagsNew(NULL);
-	osEventFlagsSet(runEndEvent,0x01);  // set bit 0 to run main music, bit 1 to run end music
-	osThreadNew(parser_thread, NULL, &parser_thread_attr);
-	osThreadNew(pwm_thread, NULL, &pwm_thread_attr);
+	robotMessage = osMessageQueueNew(1, sizeof(dataPacket), NULL);
+	motorMessage = osMessageQueueNew(1, sizeof(dataPacket), NULL);
+	osThreadNew(parser_thread, NULL, NULL);
+	osThreadNew(pwm_thread, NULL, NULL);
+	//osThreadNew(run_music_thread, NULL, NULL);
+	//osThreadNew(end_music_thread, NULL, NULL);
+	
 	osKernelStart();
 	
 	for (;;) {}
-		
+	
 }

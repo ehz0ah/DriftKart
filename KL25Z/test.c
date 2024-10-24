@@ -19,7 +19,7 @@ void UART2_IRQHandler(void)
 	}
 }
 
-int main(void)
+int test(void)
 {
 	SystemCoreClockUpdate();
 	initPWM();

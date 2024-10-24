@@ -1,10 +1,8 @@
 #include "MKL25Z4.h" // Device header
 #include "lib.h"
 
-#define BUFFER_SIZE 64
+#define BUFFER_SIZE 32
 
-#define FULL_SPEED 7500
-#define SLOW_SPEED 4500  // 60%
 
 typedef struct
 {
