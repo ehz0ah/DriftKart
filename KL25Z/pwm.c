@@ -137,30 +137,46 @@ void stop(void)
 	setWheels(RF, 0);
 }
 
-void move(uint8_t command, uint8_t spin, int speed) {
+void move(uint8_t command, int speed) {
 	switch (command) {
 		case 0x00:
 			stop();
 			break;
 		case 0x01:
-			if (spin) {
-				spinRight(speed);
-			} else {
-				curveRight(speed, 0.5);
-			}
-			break;
-		case 0x02:
-			if (spin) {
-				spinLeft(speed);
-			} else {
-				curveLeft(speed, 0.5);
-			}
-			break;
-		case 0x03:
 			forward(speed);
 			break;
-		case 0x04:
+		case 0x02:
 			reverse(speed);
+			break;
+		case 0x03:
+			curveLeft(speed,0.3);
+			break;
+		case 0x04:
+			curveRight(speed,0.3);
+			break;
+		case 0x05:
+			curveLeft(speed,0.5);
+			break;
+		case 0x06:
+			curveLeft(speed,0.8);
+			break;
+		case 0x07:
+			curveRight(speed,0.5);
+			break;
+		case 0x08:
+			curveRight(speed,0.8);
+			break;
+		case 0x09:
+			curveLeft(speed,0);
+			break;
+		case 0x0A:
+			curveRight(speed,0);
+			break;
+		case 0x0B:
+			spinLeft(speed);
+			break;
+		case 0x0C:
+			spinRight(speed);
 			break;
 		default:
 			stop();

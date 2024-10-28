@@ -22,11 +22,6 @@ uint8_t processThrottle(uint16_t throttleValue) {
     return throttleValue > 512 ? 1 : 0;  // 1 bit for throttle
 }
 
-uint8_t processSpin(ControllerPtr ctl) {
-    // Check if any misc button is pressed for spin
-    return ctl->miscButtons() != 0 ? 1 : 0;  // Spin if misc buttons pressed
-}
-
 void onConnectedController(ControllerPtr ctl) {
     ControllerProperties properties = ctl->getProperties();
     const uint8_t* btAddr = properties.btaddr;
@@ -77,14 +72,16 @@ void onDisconnectedController(ControllerPtr ctl) {
 
 void dumpGamepad(ControllerPtr ctl) {
     Serial.printf(
-        "axis X: %4d, axis Y: %4d, throttle: %4d, buttons: 0x%04x, misc: 0x%02x\n",
+        "axis X: %4d, axis Y: %4d, throttle: %4d, buttons: 0x%04x, misc: 0x%02x, dpad: 0x%02x\n",
         ctl->axisX(),       // Joystick X axis
         ctl->axisY(),       // Joystick Y axis
         ctl->throttle(),    // Throttle
         ctl->buttons(),     // Button bitmask
-        ctl->miscButtons()  // Misc button bitmask
+        ctl->miscButtons(), // Misc button bitmask
+        ctl->dpad()         // Dpad
     );
 }
+
 
 void processGamepad(ControllerPtr ctl) {
     dumpGamepad(ctl);  // Print out control values
@@ -93,24 +90,50 @@ void processGamepad(ControllerPtr ctl) {
     int16_t x = ctl->axisX();
     int16_t y = ctl->axisY();
     uint8_t throttle = processThrottle(ctl->throttle());
-    uint8_t spin = processSpin(ctl);
     const int16_t threshold = 20;
     
     uint8_t command = 0x00;
 
-    // Processing of data is done here (Basic 4 movement first)
-    if (x > threshold) {
+    // Processing of data is done here
+    if (x > threshold) {  // Forward condition here For eg. -100 < x < 100 && -100 < y < 100 
       command |= 0x01;
-      Serial.println("RIGHT");
+      Serial.println("FORWARD");
     } else if (x < -threshold) {
       command |= 0x02;
-      Serial.println("LEFT");
+      Serial.println("BACKWARD");
     } else if (y > threshold) {
       command |= 0x03;
-      Serial.println("UP");
+      Serial.println("FAR LEFT");
     } else if (y < -threshold) {
       command |= 0x04;
-      Serial.println("DOWN");
+      Serial.println("FAR RIGHT");
+    } else if (false) {
+      command |= 0x05;
+      Serial.println("LEFT 1");
+    } else if (false) {
+      command |= 0x06;
+      Serial.println("LEFT 2");
+    } else if (false) {
+      command |= 0x07;
+      Serial.println("RIGHT 1");
+    } else if (false) {    // Up till here need to configure conditions
+      command |= 0x08;
+      Serial.println("RIGHT 2");
+    } else if (ctl->l1()) {
+      command |= 0x09;
+      Serial.println("LEFT CURVE");
+    } else if (ctl->r1()) {
+      command |= 0x0A;
+      Serial.println("RIGHT CURVE");
+    } else if (ctl->dpad() == DPAD_LEFT) {
+      command |= 0x0B;
+      Serial.println("SPIN LEFT ON THE SPOT");
+    } else if (ctl->dpad() == DPAD_RIGHT) {
+      command |= 0x0C;
+      Serial.println("SPIN RIGHT ON THE SPOT");
+    } else if (ctl->a()) {  // Bottom button
+      command |= 0x0D;
+      Serial.println("RUN END");
     } else {
       Serial.println("NEUTRAL");
     }
@@ -118,11 +141,6 @@ void processGamepad(ControllerPtr ctl) {
     if (throttle) {
       command |= (1 << 4);
       Serial.println("Throttle pressed");
-    }
-
-    if (spin) {
-      command |= (1 << 5);
-      Serial.println("Spin pressed");
     }
 
     Serial2.write(command);

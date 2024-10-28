@@ -39,4 +39,4 @@ void curveRight(int speed, double diff);
 
 void stop(void);
 
-void move(uint8_t command, uint8_t spin, int speed);
+void move(uint8_t command, int speed);
