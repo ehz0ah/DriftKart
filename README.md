@@ -1,10 +1,10 @@
 # GoKart
-This project demonstrates the creation of a robot controlled by an Xbox controller using an **ESP32-DevKitC-S1** and an **NXP FRDM-KL25Z** microcontroller, running on **RTX RTOS**. The robot can move, play tunes, shine LEDs, and perform concurrent tasks using multi-threading.
+This project demonstrates the creation of a robot controlled by a PS4 controller using an **ESP32-DevKitC-S1** and an **NXP FRDM-KL25Z** microcontroller, running on **Keil RTX 5 RTOS**. The robot can move, play tunes, shine LEDs, and perform concurrent tasks using multi-threading.
 
 ## Overview
 
 ### Components:
-- **ESP32-DevKitC-S1**: Receives input from the Xbox controller via Bluetooth.
+- **ESP32-DevKitC-S1**: Receives input from the PS4 controller via Bluetooth.
 - **NXP FRDM-KL25Z**: Receives data from the ESP32 via UART and controls the robot's motors using PWM.
 - **RTX RTOS**: Manages multiple concurrent tasks including:
   - Controlling motor movement.
