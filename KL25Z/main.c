@@ -3,6 +3,7 @@
 #include "uart.h"
 #include "pwm.h"
 #include "buzzer.h"
+#include "led.h"
 
 volatile uint8_t running;  // Used for LED thread
 
@@ -57,13 +58,33 @@ void pwm_thread(void* argument) {
 
 void run_music_thread(void* argument) {
 	for(;;) {
-		playMelody();
+		playMelodyC();
 	}
 }
 
 void end_music_thread(void* argument) {
 	for(;;) {
-		playEndMusic();
+		playMelodyB();
+	}
+}
+
+void green_led_thread(void* argument) {
+	for(;;) {
+		if (running) {
+			BlinkGreenLED();
+		} else {
+			LightGreenLED();
+		}
+	}
+}
+
+void red_led_thread(void* argument) {
+	for(;;) {
+		if (running) {
+			BlinkRedLED(500);
+		} else {
+			BlinkRedLED(250);
+		}
 	}
 }
 
@@ -72,16 +93,21 @@ int main(void) {
 	SystemCoreClockUpdate();
 	initUART2(BAUD_RATE);
 	initPWM();
+	initGPIO();
+	initBuzzer();
 	
 	osKernelInitialize();
+	
 	runEndEvent = osEventFlagsNew(NULL);
 	osEventFlagsSet(runEndEvent,0x01);
 	robotMessage = osMessageQueueNew(1, sizeof(dataPacket), NULL);
 	motorMessage = osMessageQueueNew(1, sizeof(dataPacket), NULL);
 	osThreadNew(parser_thread, NULL, NULL);
 	osThreadNew(pwm_thread, NULL, NULL);
-	//osThreadNew(run_music_thread, NULL, NULL);
-	//osThreadNew(end_music_thread, NULL, NULL);
+	osThreadNew(red_led_thread, NULL, NULL);
+	osThreadNew(green_led_thread, NULL, NULL);
+	osThreadNew(run_music_thread, NULL, NULL);
+	osThreadNew(end_music_thread, NULL, NULL);
 	
 	osKernelStart();
 	
