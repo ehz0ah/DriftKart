@@ -1266,8 +1266,8 @@ Image Symbol Table
     ../fplib/cfplib/fpinit.c                 0x00000000   Number         0  fpinit.o ABSOLUTE
     ../fplib/usenofp.s                       0x00000000   Number         0  usenofp.o ABSOLUTE
     ..\..\..\Source\ARM\irq_cm0.s            0x00000000   Number         0  irq_cm0.o ABSOLUTE
-    C:\Users\haozh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Source\rtx_lib.c 0x00000000   Number         0  rtx_lib.o ABSOLUTE
-    C:\\Users\\haozh\\AppData\\Local\\Arm\\Packs\\ARM\\CMSIS\\5.6.0\\CMSIS\\RTOS2\\RTX\\Source\\rtx_lib.c 0x00000000   Number         0  rtx_lib.o ABSOLUTE
+    C:\Users\SHAIYAN ALAM\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Source\rtx_lib.c 0x00000000   Number         0  rtx_lib.o ABSOLUTE
+    C:\\Users\\SHAIYAN ALAM\\AppData\\Local\\Arm\\Packs\\ARM\\CMSIS\\5.6.0\\CMSIS\\RTOS2\\RTX\\Source\\rtx_lib.c 0x00000000   Number         0  rtx_lib.o ABSOLUTE
     RTE\CMSIS\RTX_Config.c                   0x00000000   Number         0  rtx_config.o ABSOLUTE
     RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s 0x00000000   Number         0  startup_mkl25z4.o ABSOLUTE
     RTE\Device\MKL25Z128xxx4\system_MKL25Z4.c 0x00000000   Number         0  system_mkl25z4.o ABSOLUTE
@@ -1572,41 +1572,41 @@ Image Symbol Table
     i.forward                                0x000027a4   Section        0  pwm.o(i.forward)
     i.green_led_thread                       0x000027bc   Section        0  main.o(i.green_led_thread)
     i.initBuzzer                             0x000027d8   Section        0  buzzer.o(i.initBuzzer)
-    i.initGPIO                               0x00002824   Section        0  led.o(i.initGPIO)
-    i.initPWM                                0x00002994   Section        0  pwm.o(i.initPWM)
-    i.initUART2                              0x00002ac0   Section        0  uart.o(i.initUART2)
-    i.main                                   0x00002ba8   Section        0  main.o(i.main)
-    i.move                                   0x00002c5c   Section        0  pwm.o(i.move)
-    i.offGreen                               0x00002d1c   Section        0  led.o(i.offGreen)
-    i.onGreen                                0x00002d68   Section        0  led.o(i.onGreen)
-    i.osRtxErrorNotify                       0x00002db4   Section        0  rtx_config.o(i.osRtxErrorNotify)
-    i.osRtxIdleThread                        0x00002dd4   Section        0  rtx_config.o(i.osRtxIdleThread)
-    i.os_kernel_is_active                    0x00002dd8   Section        0  rtx_lib.o(i.os_kernel_is_active)
-    os_kernel_is_active                      0x00002dd9   Thumb Code    30  rtx_lib.o(i.os_kernel_is_active)
-    i.parser_thread                          0x00002dfc   Section        0  main.o(i.parser_thread)
-    i.playMelodyB                            0x00002e60   Section        0  buzzer.o(i.playMelodyB)
-    i.playMelodyC                            0x00002eac   Section        0  buzzer.o(i.playMelodyC)
-    i.pwm_thread                             0x00002efc   Section        0  main.o(i.pwm_thread)
-    i.red_led_thread                         0x00002f38   Section        0  main.o(i.red_led_thread)
-    i.reverse                                0x00002f58   Section        0  pwm.o(i.reverse)
-    i.run_music_thread                       0x00002f6e   Section        0  main.o(i.run_music_thread)
-    i.setPWMTone                             0x00002f78   Section        0  buzzer.o(i.setPWMTone)
-    i.setWheels                              0x00002fd4   Section        0  pwm.o(i.setWheels)
-    i.spinLeft                               0x00003018   Section        0  pwm.o(i.spinLeft)
-    i.spinRight                              0x0000302e   Section        0  pwm.o(i.spinRight)
-    i.stop                                   0x00003044   Section        0  pwm.o(i.stop)
-    i.stopBuzzer                             0x00003058   Section        0  buzzer.o(i.stopBuzzer)
-    .constdata                               0x0000306c   Section      100  rtx_lib.o(.constdata)
-    x$fpl$usenofp                            0x0000306c   Section        0  usenofp.o(x$fpl$usenofp)
-    os_idle_thread_attr                      0x0000306c   Data          36  rtx_lib.o(.constdata)
-    os_timer_thread_attr                     0x00003090   Data          36  rtx_lib.o(.constdata)
-    os_timer_mq_attr                         0x000030b4   Data          24  rtx_lib.o(.constdata)
-    .constdata                               0x000030d0   Section        1  irq_cm0.o(.constdata)
-    .rodata                                  0x000030d4   Section      160  rtx_lib.o(.rodata)
-    __tagsym$$used                           0x000030d4   Number         0  rtx_lib.o(.rodata)
-    __tagsym$$used                           0x0000313c   Number         0  rtx_lib.o(.rodata)
-    [Anonymous Symbol]                       0x00003174   Section        0  rtx_kernel.o(.rodata.str1.4)
-    .L.str                                   0x00003174   Data          11  rtx_kernel.o(.rodata.str1.4)
+    i.initGPIO                               0x0000284c   Section        0  led.o(i.initGPIO)
+    i.initPWM                                0x000029bc   Section        0  pwm.o(i.initPWM)
+    i.initUART2                              0x00002ae8   Section        0  uart.o(i.initUART2)
+    i.main                                   0x00002bd0   Section        0  main.o(i.main)
+    i.move                                   0x00002c84   Section        0  pwm.o(i.move)
+    i.offGreen                               0x00002d50   Section        0  led.o(i.offGreen)
+    i.onGreen                                0x00002d9c   Section        0  led.o(i.onGreen)
+    i.osRtxErrorNotify                       0x00002de8   Section        0  rtx_config.o(i.osRtxErrorNotify)
+    i.osRtxIdleThread                        0x00002e08   Section        0  rtx_config.o(i.osRtxIdleThread)
+    i.os_kernel_is_active                    0x00002e0c   Section        0  rtx_lib.o(i.os_kernel_is_active)
+    os_kernel_is_active                      0x00002e0d   Thumb Code    30  rtx_lib.o(i.os_kernel_is_active)
+    i.parser_thread                          0x00002e30   Section        0  main.o(i.parser_thread)
+    i.playMelodyB                            0x00002e94   Section        0  buzzer.o(i.playMelodyB)
+    i.playMelodyC                            0x00002ee0   Section        0  buzzer.o(i.playMelodyC)
+    i.pwm_thread                             0x00002f30   Section        0  main.o(i.pwm_thread)
+    i.red_led_thread                         0x00002f6c   Section        0  main.o(i.red_led_thread)
+    i.reverse                                0x00002f8c   Section        0  pwm.o(i.reverse)
+    i.run_music_thread                       0x00002fa2   Section        0  main.o(i.run_music_thread)
+    i.setPWMTone                             0x00002fac   Section        0  buzzer.o(i.setPWMTone)
+    i.setWheels                              0x00003008   Section        0  pwm.o(i.setWheels)
+    i.spinLeft                               0x0000304c   Section        0  pwm.o(i.spinLeft)
+    i.spinRight                              0x00003062   Section        0  pwm.o(i.spinRight)
+    i.stop                                   0x00003078   Section        0  pwm.o(i.stop)
+    i.stopBuzzer                             0x0000308c   Section        0  buzzer.o(i.stopBuzzer)
+    .constdata                               0x000030a0   Section      100  rtx_lib.o(.constdata)
+    x$fpl$usenofp                            0x000030a0   Section        0  usenofp.o(x$fpl$usenofp)
+    os_idle_thread_attr                      0x000030a0   Data          36  rtx_lib.o(.constdata)
+    os_timer_thread_attr                     0x000030c4   Data          36  rtx_lib.o(.constdata)
+    os_timer_mq_attr                         0x000030e8   Data          24  rtx_lib.o(.constdata)
+    .constdata                               0x00003104   Section        1  irq_cm0.o(.constdata)
+    .rodata                                  0x00003108   Section      160  rtx_lib.o(.rodata)
+    __tagsym$$used                           0x00003108   Number         0  rtx_lib.o(.rodata)
+    __tagsym$$used                           0x00003170   Number         0  rtx_lib.o(.rodata)
+    [Anonymous Symbol]                       0x000031a8   Section        0  rtx_kernel.o(.rodata.str1.4)
+    .L.str                                   0x000031a8   Data          11  rtx_kernel.o(.rodata.str1.4)
     .bss.os                                  0x1ffff000   Section     4160  rtx_lib.o(.bss.os)
     os_mem                                   0x1ffff000   Data        4096  rtx_lib.o(.bss.os)
     os_isr_queue                             0x20000000   Data          64  rtx_lib.o(.bss.os)
@@ -1621,19 +1621,19 @@ Image Symbol Table
     os_idle_thread_stack                     0x20000150   Data         256  rtx_lib.o(.bss.os.thread.stack)
     os_timer_thread_stack                    0x20000250   Data         256  rtx_lib.o(.bss.os.thread.stack)
     .data                                    0x20000350   Section       16  main.o(.data)
-    .data                                    0x20000360   Section      904  buzzer.o(.data)
-    .data                                    0x200006e8   Section       40  led.o(.data)
-    .data                                    0x20000710   Section        5  rtx_lib.o(.data)
-    os_kernel_active                         0x20000714   Data           1  rtx_lib.o(.data)
-    .data                                    0x20000718   Section        4  system_mkl25z4.o(.data)
-    .bss                                     0x200007c0   Section       96  libspace.o(.bss)
-    [Anonymous Symbol]                       0x20000820   Section        0  os_systick.o(.bss.PendST)
-    PendST                                   0x20000820   Data           1  os_systick.o(.bss.PendST)
-    HEAP                                     0x20000828   Section        0  startup_mkl25z4.o(HEAP)
-    STACK                                    0x20000828   Section      256  startup_mkl25z4.o(STACK)
-    Heap_Mem                                 0x20000828   Data           0  startup_mkl25z4.o(HEAP)
-    Stack_Mem                                0x20000828   Data         256  startup_mkl25z4.o(STACK)
-    __initial_sp                             0x20000928   Data           0  startup_mkl25z4.o(STACK)
+    .data                                    0x20000360   Section      784  buzzer.o(.data)
+    .data                                    0x20000670   Section       40  led.o(.data)
+    .data                                    0x20000698   Section        5  rtx_lib.o(.data)
+    os_kernel_active                         0x2000069c   Data           1  rtx_lib.o(.data)
+    .data                                    0x200006a0   Section        4  system_mkl25z4.o(.data)
+    .bss                                     0x20000748   Section       96  libspace.o(.bss)
+    [Anonymous Symbol]                       0x200007a8   Section        0  os_systick.o(.bss.PendST)
+    PendST                                   0x200007a8   Data           1  os_systick.o(.bss.PendST)
+    HEAP                                     0x200007b0   Section        0  startup_mkl25z4.o(HEAP)
+    STACK                                    0x200007b0   Section      256  startup_mkl25z4.o(STACK)
+    Heap_Mem                                 0x200007b0   Data           0  startup_mkl25z4.o(HEAP)
+    Stack_Mem                                0x200007b0   Data         256  startup_mkl25z4.o(STACK)
+    __initial_sp                             0x200008b0   Data           0  startup_mkl25z4.o(STACK)
 
     Global Symbols
 
@@ -1870,36 +1870,36 @@ Image Symbol Table
     end_music_thread                         0x0000279d   Thumb Code     8  main.o(i.end_music_thread)
     forward                                  0x000027a5   Thumb Code    22  pwm.o(i.forward)
     green_led_thread                         0x000027bd   Thumb Code    22  main.o(i.green_led_thread)
-    initBuzzer                               0x000027d9   Thumb Code    62  buzzer.o(i.initBuzzer)
-    initGPIO                                 0x00002825   Thumb Code   346  led.o(i.initGPIO)
-    initPWM                                  0x00002995   Thumb Code   282  pwm.o(i.initPWM)
-    initUART2                                0x00002ac1   Thumb Code   208  uart.o(i.initUART2)
-    main                                     0x00002ba9   Thumb Code   144  main.o(i.main)
-    move                                     0x00002c5d   Thumb Code   172  pwm.o(i.move)
-    offGreen                                 0x00002d1d   Thumb Code    66  led.o(i.offGreen)
-    onGreen                                  0x00002d69   Thumb Code    66  led.o(i.onGreen)
-    osRtxErrorNotify                         0x00002db5   Thumb Code    32  rtx_config.o(i.osRtxErrorNotify)
-    osRtxIdleThread                          0x00002dd5   Thumb Code     4  rtx_config.o(i.osRtxIdleThread)
-    parser_thread                            0x00002dfd   Thumb Code    84  main.o(i.parser_thread)
-    playMelodyB                              0x00002e61   Thumb Code    62  buzzer.o(i.playMelodyB)
-    playMelodyC                              0x00002ead   Thumb Code    68  buzzer.o(i.playMelodyC)
-    pwm_thread                               0x00002efd   Thumb Code    48  main.o(i.pwm_thread)
-    red_led_thread                           0x00002f39   Thumb Code    28  main.o(i.red_led_thread)
-    reverse                                  0x00002f59   Thumb Code    22  pwm.o(i.reverse)
-    run_music_thread                         0x00002f6f   Thumb Code     8  main.o(i.run_music_thread)
-    setPWMTone                               0x00002f79   Thumb Code    80  buzzer.o(i.setPWMTone)
-    setWheels                                0x00002fd5   Thumb Code    62  pwm.o(i.setWheels)
-    spinLeft                                 0x00003019   Thumb Code    22  pwm.o(i.spinLeft)
-    spinRight                                0x0000302f   Thumb Code    22  pwm.o(i.spinRight)
-    stop                                     0x00003045   Thumb Code    20  pwm.o(i.stop)
-    stopBuzzer                               0x00003059   Thumb Code    14  buzzer.o(i.stopBuzzer)
-    __I$use$fp                               0x0000306c   Number         0  usenofp.o(x$fpl$usenofp)
-    osRtxUserSVC                             0x000030cc   Data           4  rtx_lib.o(.constdata)
-    irqRtxLib                                0x000030d0   Data           1  irq_cm0.o(.constdata)
-    osRtxConfig                              0x000030d4   Data         104  rtx_lib.o(.rodata)
-    os_cb_sections                           0x0000313c   Data          56  rtx_lib.o(.rodata)
-    Region$$Table$$Base                      0x00003180   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x000031a0   Number         0  anon$$obj.o(Region$$Table)
+    initBuzzer                               0x000027d9   Thumb Code   102  buzzer.o(i.initBuzzer)
+    initGPIO                                 0x0000284d   Thumb Code   346  led.o(i.initGPIO)
+    initPWM                                  0x000029bd   Thumb Code   282  pwm.o(i.initPWM)
+    initUART2                                0x00002ae9   Thumb Code   208  uart.o(i.initUART2)
+    main                                     0x00002bd1   Thumb Code   144  main.o(i.main)
+    move                                     0x00002c85   Thumb Code   172  pwm.o(i.move)
+    offGreen                                 0x00002d51   Thumb Code    66  led.o(i.offGreen)
+    onGreen                                  0x00002d9d   Thumb Code    66  led.o(i.onGreen)
+    osRtxErrorNotify                         0x00002de9   Thumb Code    32  rtx_config.o(i.osRtxErrorNotify)
+    osRtxIdleThread                          0x00002e09   Thumb Code     4  rtx_config.o(i.osRtxIdleThread)
+    parser_thread                            0x00002e31   Thumb Code    84  main.o(i.parser_thread)
+    playMelodyB                              0x00002e95   Thumb Code    62  buzzer.o(i.playMelodyB)
+    playMelodyC                              0x00002ee1   Thumb Code    68  buzzer.o(i.playMelodyC)
+    pwm_thread                               0x00002f31   Thumb Code    48  main.o(i.pwm_thread)
+    red_led_thread                           0x00002f6d   Thumb Code    28  main.o(i.red_led_thread)
+    reverse                                  0x00002f8d   Thumb Code    22  pwm.o(i.reverse)
+    run_music_thread                         0x00002fa3   Thumb Code     8  main.o(i.run_music_thread)
+    setPWMTone                               0x00002fad   Thumb Code    80  buzzer.o(i.setPWMTone)
+    setWheels                                0x00003009   Thumb Code    62  pwm.o(i.setWheels)
+    spinLeft                                 0x0000304d   Thumb Code    22  pwm.o(i.spinLeft)
+    spinRight                                0x00003063   Thumb Code    22  pwm.o(i.spinRight)
+    stop                                     0x00003079   Thumb Code    20  pwm.o(i.stop)
+    stopBuzzer                               0x0000308d   Thumb Code    14  buzzer.o(i.stopBuzzer)
+    __I$use$fp                               0x000030a0   Number         0  usenofp.o(x$fpl$usenofp)
+    osRtxUserSVC                             0x00003100   Data           4  rtx_lib.o(.constdata)
+    irqRtxLib                                0x00003104   Data           1  irq_cm0.o(.constdata)
+    osRtxConfig                              0x00003108   Data         104  rtx_lib.o(.rodata)
+    os_cb_sections                           0x00003170   Data          56  rtx_lib.o(.rodata)
+    Region$$Table$$Base                      0x000031b4   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x000031d4   Number         0  anon$$obj.o(Region$$Table)
     .bss.os.msgqueue.cb$$Base                0x20000040   Number         0  rtx_lib.o(.bss.os.msgqueue.cb)
     .bss.os.msgqueue.cb$$Limit               0x20000074   Number         0  rtx_lib.o(.bss.os.msgqueue.cb)
     .bss.os.thread.cb$$Base                  0x200000c4   Number         0  rtx_lib.o(.bss.os.thread.cb)
@@ -1910,16 +1910,16 @@ Image Symbol Table
     robotMessage                             0x2000035c   Data           4  main.o(.data)
     melodyA                                  0x20000360   Data         112  buzzer.o(.data)
     durationsA                               0x200003d0   Data         112  buzzer.o(.data)
-    melodyB                                  0x20000440   Data         104  buzzer.o(.data)
-    durationsB                               0x200004a8   Data         104  buzzer.o(.data)
-    melodyC                                  0x20000510   Data         236  buzzer.o(.data)
-    durationsC                               0x200005fc   Data         236  buzzer.o(.data)
-    green_led_array                          0x200006e8   Data          40  led.o(.data)
-    irqRtxLibRef                             0x20000710   Data           4  rtx_lib.o(.data)
-    SystemCoreClock                          0x20000718   Data           4  system_mkl25z4.o(.data)
-    osRtxInfo                                0x2000071c   Data         164  rtx_kernel.o(.data.os)
-    __libspace_start                         0x200007c0   Data          96  libspace.o(.bss)
-    __temporary_stack_top$libspace           0x20000820   Data           0  libspace.o(.bss)
+    melodyB                                  0x20000440   Data          44  buzzer.o(.data)
+    durationsB                               0x2000046c   Data          44  buzzer.o(.data)
+    melodyC                                  0x20000498   Data         236  buzzer.o(.data)
+    durationsC                               0x20000584   Data         236  buzzer.o(.data)
+    green_led_array                          0x20000670   Data          40  led.o(.data)
+    irqRtxLibRef                             0x20000698   Data           4  rtx_lib.o(.data)
+    SystemCoreClock                          0x200006a0   Data           4  system_mkl25z4.o(.data)
+    osRtxInfo                                0x200006a4   Data         164  rtx_kernel.o(.data.os)
+    __libspace_start                         0x20000748   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x200007a8   Data           0  libspace.o(.bss)
 
 
 
@@ -1929,9 +1929,9 @@ Memory Map of the image
 
   Image Entry point : 0x00000189
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x00004960, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x000032a0])
+  Load Region LR_1 (Base: 0x00000000, Size: 0x0000491c, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x000032b8])
 
-    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x000031a0, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x000031d4, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -2103,42 +2103,42 @@ Memory Map of the image
     0x000027a4   0x000027a4   0x00000016   Code   RO          138    i.forward           pwm.o
     0x000027ba   0x000027ba   0x00000002   PAD
     0x000027bc   0x000027bc   0x0000001c   Code   RO          217    i.green_led_thread  main.o
-    0x000027d8   0x000027d8   0x0000004c   Code   RO          293    i.initBuzzer        buzzer.o
-    0x00002824   0x00002824   0x00000170   Code   RO          353    i.initGPIO          led.o
-    0x00002994   0x00002994   0x0000012c   Code   RO          139    i.initPWM           pwm.o
-    0x00002ac0   0x00002ac0   0x000000e8   Code   RO           96    i.initUART2         uart.o
-    0x00002ba8   0x00002ba8   0x000000b4   Code   RO          218    i.main              main.o
-    0x00002c5c   0x00002c5c   0x000000c0   Code   RO          140    i.move              pwm.o
-    0x00002d1c   0x00002d1c   0x0000004c   Code   RO          354    i.offGreen          led.o
-    0x00002d68   0x00002d68   0x0000004c   Code   RO          355    i.onGreen           led.o
-    0x00002db4   0x00002db4   0x00000020   Code   RO          483    i.osRtxErrorNotify  rtx_config.o
-    0x00002dd4   0x00002dd4   0x00000004   Code   RO          484    i.osRtxIdleThread   rtx_config.o
-    0x00002dd8   0x00002dd8   0x00000024   Code   RO          412    i.os_kernel_is_active  rtx_lib.o
-    0x00002dfc   0x00002dfc   0x00000064   Code   RO          219    i.parser_thread     main.o
-    0x00002e60   0x00002e60   0x0000004c   Code   RO          295    i.playMelodyB       buzzer.o
-    0x00002eac   0x00002eac   0x00000050   Code   RO          296    i.playMelodyC       buzzer.o
-    0x00002efc   0x00002efc   0x0000003c   Code   RO          220    i.pwm_thread        main.o
-    0x00002f38   0x00002f38   0x00000020   Code   RO          221    i.red_led_thread    main.o
-    0x00002f58   0x00002f58   0x00000016   Code   RO          141    i.reverse           pwm.o
-    0x00002f6e   0x00002f6e   0x00000008   Code   RO          222    i.run_music_thread  main.o
-    0x00002f76   0x00002f76   0x00000002   PAD
-    0x00002f78   0x00002f78   0x0000005c   Code   RO          297    i.setPWMTone        buzzer.o
-    0x00002fd4   0x00002fd4   0x00000044   Code   RO          142    i.setWheels         pwm.o
-    0x00003018   0x00003018   0x00000016   Code   RO          143    i.spinLeft          pwm.o
-    0x0000302e   0x0000302e   0x00000016   Code   RO          144    i.spinRight         pwm.o
-    0x00003044   0x00003044   0x00000014   Code   RO          145    i.stop              pwm.o
-    0x00003058   0x00003058   0x00000014   Code   RO          298    i.stopBuzzer        buzzer.o
-    0x0000306c   0x0000306c   0x00000000   Code   RO         1087    x$fpl$usenofp       fz_ps.l(usenofp.o)
-    0x0000306c   0x0000306c   0x00000064   Data   RO          419    .constdata          rtx_lib.o
-    0x000030d0   0x000030d0   0x00000001   Data   RO          901    .constdata          RTX_CM0.lib(irq_cm0.o)
-    0x000030d1   0x000030d1   0x00000003   PAD
-    0x000030d4   0x000030d4   0x000000a0   Data   RO          421    .rodata             rtx_lib.o
-    0x00003174   0x00003174   0x0000000b   Data   RO          608    .rodata.str1.4      RTX_CM0.lib(rtx_kernel.o)
-    0x0000317f   0x0000317f   0x00000001   PAD
-    0x00003180   0x00003180   0x00000020   Data   RO         1246    Region$$Table       anon$$obj.o
+    0x000027d8   0x000027d8   0x00000074   Code   RO          293    i.initBuzzer        buzzer.o
+    0x0000284c   0x0000284c   0x00000170   Code   RO          353    i.initGPIO          led.o
+    0x000029bc   0x000029bc   0x0000012c   Code   RO          139    i.initPWM           pwm.o
+    0x00002ae8   0x00002ae8   0x000000e8   Code   RO           96    i.initUART2         uart.o
+    0x00002bd0   0x00002bd0   0x000000b4   Code   RO          218    i.main              main.o
+    0x00002c84   0x00002c84   0x000000cc   Code   RO          140    i.move              pwm.o
+    0x00002d50   0x00002d50   0x0000004c   Code   RO          354    i.offGreen          led.o
+    0x00002d9c   0x00002d9c   0x0000004c   Code   RO          355    i.onGreen           led.o
+    0x00002de8   0x00002de8   0x00000020   Code   RO          483    i.osRtxErrorNotify  rtx_config.o
+    0x00002e08   0x00002e08   0x00000004   Code   RO          484    i.osRtxIdleThread   rtx_config.o
+    0x00002e0c   0x00002e0c   0x00000024   Code   RO          412    i.os_kernel_is_active  rtx_lib.o
+    0x00002e30   0x00002e30   0x00000064   Code   RO          219    i.parser_thread     main.o
+    0x00002e94   0x00002e94   0x0000004c   Code   RO          295    i.playMelodyB       buzzer.o
+    0x00002ee0   0x00002ee0   0x00000050   Code   RO          296    i.playMelodyC       buzzer.o
+    0x00002f30   0x00002f30   0x0000003c   Code   RO          220    i.pwm_thread        main.o
+    0x00002f6c   0x00002f6c   0x00000020   Code   RO          221    i.red_led_thread    main.o
+    0x00002f8c   0x00002f8c   0x00000016   Code   RO          141    i.reverse           pwm.o
+    0x00002fa2   0x00002fa2   0x00000008   Code   RO          222    i.run_music_thread  main.o
+    0x00002faa   0x00002faa   0x00000002   PAD
+    0x00002fac   0x00002fac   0x0000005c   Code   RO          297    i.setPWMTone        buzzer.o
+    0x00003008   0x00003008   0x00000044   Code   RO          142    i.setWheels         pwm.o
+    0x0000304c   0x0000304c   0x00000016   Code   RO          143    i.spinLeft          pwm.o
+    0x00003062   0x00003062   0x00000016   Code   RO          144    i.spinRight         pwm.o
+    0x00003078   0x00003078   0x00000014   Code   RO          145    i.stop              pwm.o
+    0x0000308c   0x0000308c   0x00000014   Code   RO          298    i.stopBuzzer        buzzer.o
+    0x000030a0   0x000030a0   0x00000000   Code   RO         1087    x$fpl$usenofp       fz_ps.l(usenofp.o)
+    0x000030a0   0x000030a0   0x00000064   Data   RO          419    .constdata          rtx_lib.o
+    0x00003104   0x00003104   0x00000001   Data   RO          901    .constdata          RTX_CM0.lib(irq_cm0.o)
+    0x00003105   0x00003105   0x00000003   PAD
+    0x00003108   0x00003108   0x000000a0   Data   RO          421    .rodata             rtx_lib.o
+    0x000031a8   0x000031a8   0x0000000b   Data   RO          608    .rodata.str1.4      RTX_CM0.lib(rtx_kernel.o)
+    0x000031b3   0x000031b3   0x00000001   PAD
+    0x000031b4   0x000031b4   0x00000020   Data   RO         1246    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x1ffff000, Load base: 0x000031a0, Size: 0x000017c0, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x00000100])
+    Execution Region ER_RW (Exec base: 0x1ffff000, Load base: 0x000031d4, Size: 0x00001748, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x000000e4])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -2149,23 +2149,23 @@ Memory Map of the image
     0x2000014c   COMPRESSED   0x00000004   PAD
     0x20000150   COMPRESSED   0x00000200   Data   RW          418    .bss.os.thread.stack  rtx_lib.o
     0x20000350   COMPRESSED   0x00000010   Data   RW          223    .data               main.o
-    0x20000360   COMPRESSED   0x00000388   Data   RW          299    .data               buzzer.o
-    0x200006e8   COMPRESSED   0x00000028   Data   RW          356    .data               led.o
-    0x20000710   COMPRESSED   0x00000005   Data   RW          420    .data               rtx_lib.o
-    0x20000715   COMPRESSED   0x00000003   PAD
-    0x20000718   COMPRESSED   0x00000004   Data   RW          525    .data               system_mkl25z4.o
-    0x2000071c   COMPRESSED   0x000000a4   Data   RW          609    .data.os            RTX_CM0.lib(rtx_kernel.o)
+    0x20000360   COMPRESSED   0x00000310   Data   RW          299    .data               buzzer.o
+    0x20000670   COMPRESSED   0x00000028   Data   RW          356    .data               led.o
+    0x20000698   COMPRESSED   0x00000005   Data   RW          420    .data               rtx_lib.o
+    0x2000069d   COMPRESSED   0x00000003   PAD
+    0x200006a0   COMPRESSED   0x00000004   Data   RW          525    .data               system_mkl25z4.o
+    0x200006a4   COMPRESSED   0x000000a4   Data   RW          609    .data.os            RTX_CM0.lib(rtx_kernel.o)
 
 
-    Execution Region ER_ZI (Exec base: 0x200007c0, Load base: 0x000032a0, Size: 0x00000168, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000748, Load base: 0x000032b8, Size: 0x00000168, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x200007c0        -       0x00000060   Zero   RW         1119    .bss                c_p.l(libspace.o)
-    0x20000820        -       0x00000001   Zero   RW         1049    .bss.PendST         RTX_CM0.lib(os_systick.o)
-    0x20000821   0x000032a0   0x00000007   PAD
-    0x20000828        -       0x00000000   Zero   RW          512    HEAP                startup_mkl25z4.o
-    0x20000828        -       0x00000100   Zero   RW          511    STACK               startup_mkl25z4.o
+    0x20000748        -       0x00000060   Zero   RW         1119    .bss                c_p.l(libspace.o)
+    0x200007a8        -       0x00000001   Zero   RW         1049    .bss.PendST         RTX_CM0.lib(os_systick.o)
+    0x200007a9   0x000032b8   0x00000007   PAD
+    0x200007b0        -       0x00000000   Zero   RW          512    HEAP                startup_mkl25z4.o
+    0x200007b0        -       0x00000100   Zero   RW          511    STACK               startup_mkl25z4.o
 
 
 ==============================================================================
@@ -2175,19 +2175,19 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       344         58          0        904          0       3226   buzzer.o
-       672         56          0         40          0       3708   led.o
-       508         90          0         16          0      12521   main.o
-       812         60          0          0          0       5204   pwm.o
-         0          0          0          0          0     219744   queue.o
-        36          8          0          0          0        949   rtx_config.o
-       136          6        260       4945          0      12706   rtx_lib.o
-        80         44        192          0        256        872   startup_mkl25z4.o
-       712         84          0          4          0       1631   system_mkl25z4.o
-       352         34          0          0          0       9248   uart.o
+       384         58          0        784          0       3490   buzzer.o
+       672         56          0         40          0       4016   led.o
+       508         90          0         16          0      12921   main.o
+       824         72          0          0          0       5624   pwm.o
+         0          0          0          0          0     219784   queue.o
+        36          8          0          0          0       1029   rtx_config.o
+       136          6        260       4945          0      12846   rtx_lib.o
+        80         44        192          0        256        948   startup_mkl25z4.o
+       712         84          0          4          0       1747   system_mkl25z4.o
+       352         34          0          0          0       9356   uart.o
 
     ----------------------------------------------------------------------
-      3656        440        484       5916        256     269809   Object Totals
+      3708        452        484       5796        256     271761   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          4          0          0          7          0          0   (incl. Padding)
 
@@ -2258,15 +2258,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     12204        834        500       6080        360     392469   Grand Totals
-     12204        834        500        256        360     392469   ELF Image Totals (compressed)
-     12204        834        500        256          0          0   ROM Totals
+     12256        846        500       5960        360     394421   Grand Totals
+     12256        846        500        228        360     394421   ELF Image Totals (compressed)
+     12256        846        500        228          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                12704 (  12.41kB)
-    Total RW  Size (RW Data + ZI Data)              6440 (   6.29kB)
-    Total ROM Size (Code + RO Data + RW Data)      12960 (  12.66kB)
+    Total RO  Size (Code + RO Data)                12756 (  12.46kB)
+    Total RW  Size (RW Data + ZI Data)              6320 (   6.17kB)
+    Total ROM Size (Code + RO Data + RW Data)      12984 (  12.68kB)
 
 ==============================================================================
 

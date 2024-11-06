@@ -5,5 +5,9 @@
 
 #define MASK(x) (1 << (x))
 
-#define FULL_SPEED 7500
-#define SLOW_SPEED 5000  // 66%
+#define FULL_SPEED 6500
+#define SLOW_SPEED 3000 
+
+
+
+

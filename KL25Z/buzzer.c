@@ -19,6 +19,7 @@
 #define  rest    0
 
 
+
 // Melody B (Twinkle, Twinkle, Little Star)
 uint32_t melodyA[] = {
     523, 523, 784, 784, 880, 880, 784, // Twinkle, twinkle, little star
@@ -42,8 +43,6 @@ uint32_t melodyB[] = {
     659, 659, 659, // Jingle bells
     659, 659, 659, // Jingle bells
     659, 784, 523, 587, 659, // Jingle all the way
-    698, 698, 698, 698, 698, 659, 659, 659, 659, // Oh, what fun it is to ride
-    659, 587, 587, 659, 587, 784 // In a one-horse open sleigh
 };
 
 // Durations for each note (in milliseconds)
@@ -51,8 +50,6 @@ uint32_t durationsB[] = {
     300, 300, 600, // Jingle bells
     300, 300, 600, // Jingle bells
     300, 300, 300, 300, 800, // Jingle all the way
-    300, 300, 300, 300, 300, 300, 300, 300, 600, // Oh, what fun it is to ride
-    300, 300, 300, 300, 300, 800 // In a one-horse open sleigh
 };
 
 uint32_t melodyC[]  = { 
@@ -79,46 +76,47 @@ uint32_t durationsC[]  = {
 
 
 void initBuzzer(void) {
-    // Enable clock for Port C and TPM modules
-    SIM->SCGC5 |= SIM_SCGC5_PORTC_MASK;   // Enable clock for Port C
-    SIM->SCGC6 |= SIM_SCGC6_TPM0_MASK;    // Enable clock for TPM0
+    // Enable clock for Port A and TPM2 modules
+    SIM->SCGC5 |= SIM_SCGC5_PORTA_MASK;   // Enable clock for Port A
+    SIM->SCGC6 |= SIM_SCGC6_TPM2_MASK;    // Enable clock for TPM2
 
-    // Set PTC2 (TPM0_CH1) to alternate function (MUX = 4 for TPM)
-    PORTC->PCR[2] = PORT_PCR_MUX(4);
+    // Set PTA2 to TPM2_CH1 by selecting the appropriate MUX setting (MUX = 3)
+    PORTA->PCR[2] &= ~PORT_PCR_MUX_MASK;      // Clear MUX field for PTA2
+    PORTA->PCR[2] |= PORT_PCR_MUX(3);         // Set MUX to 3 for TPM2_CH1 function
 
-    // Set TPM clock source to MCGFLLCLK (or another clock source)
-    SIM->SOPT2 |= SIM_SOPT2_TPMSRC(1); // Set clock source for TPM
+    // Set TPM clock source to MCGFLLCLK or an alternative clock source
+    SIM->SOPT2 |= SIM_SOPT2_TPMSRC(1);        // Set TPM clock source to 48 MHz MCGFLLCLK
 
-    // Set TPM0 to up-counting mode and configure prescaler
-    TPM0->SC = TPM_SC_PS(7); // Prescaler of 128
+    // Set TPM2 to up-counting mode and configure prescaler
+    TPM2->SC = TPM_SC_PS(7);                  // Set prescaler to 128
 
-    // Enable TPM0 and set it to PWM mode with edge-aligned PWM
-    TPM0->CONTROLS[1].CnSC = TPM_CnSC_MSB_MASK | TPM_CnSC_ELSB_MASK; // Edge-aligned PWM
+    // Set TPM2 to edge-aligned PWM mode with high-true pulses
+    TPM2_C1SC &= ~((TPM_CnSC_ELSB_MASK | TPM_CnSC_ELSA_MASK | TPM_CnSC_MSB_MASK | TPM_CnSC_MSA_MASK));
+    TPM2_C1SC |= (TPM_CnSC_MSB_MASK | TPM_CnSC_ELSB_MASK);  // Edge-aligned PWM with high-true pulses
 }
 
+
 void setPWMTone(uint32_t frequency) {
-    // Ensure frequency is valid and not zero to avoid division by zero
     if (frequency == 0) {
-        TPM0->SC &= ~TPM_SC_CMOD_MASK; // Stop TPM if frequency is zero
+        TPM2->SC &= ~TPM_SC_CMOD_MASK; // Stop TPM2 if frequency is zero
         return;
     }
 
     // Calculate MOD value for the desired frequency
-    uint32_t modValue = (CLOCK / (128 * frequency)) - 1;
+    uint32_t modValue = 375000/frequency;
 
     // Set MOD value to control the frequency
-    TPM0->MOD = modValue;
+    TPM2->MOD = modValue;
 
-    // Set duty cycle to 50% (adjust as needed, 100% would be modValue)
-    TPM0->CONTROLS[1].CnV = modValue *0.75; // Use half of MOD for 50% duty cycle
+    // Set duty cycle to 50% (adjustable as needed)
+    TPM2_C1V = modValue * 0.5;
 
-    // Start TPM0 if not already started
-    TPM0->SC |= TPM_SC_CMOD(1); // Start TPM with external clock
+    // Start TPM2 if not already started
+    TPM2->SC |= TPM_SC_CMOD(1); // Start TPM2 with the selected clock
 }
 
 void stopBuzzer(void) {
-    // Disable the TPM0 by setting CMOD to 0
-    TPM0->SC &= ~TPM_SC_CMOD_MASK;
+    TPM2->SC &= ~TPM_SC_CMOD_MASK; // Disable TPM2
 }
 
 

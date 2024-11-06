@@ -31,3 +31,5 @@ void playMelodyB(void);
 
 void playMelodyC(void);
 
+void playMelodyMario(void);
+
