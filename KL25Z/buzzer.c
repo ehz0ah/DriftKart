@@ -20,36 +20,44 @@
 
 
 
-// Melody B (Twinkle, Twinkle, Little Star)
+// Melody A (Twinkle Twinkle Little Star)
 uint32_t melodyA[] = {
-    523, 523, 784, 784, 880, 880, 784, // Twinkle, twinkle, little star
-    739, 739, 698, 698, 659, 659, 523, // How I wonder what you are
-    523, 523, 784, 784, 880, 880, 784, // Up above the world so high
-    739, 739, 698, 698, 659, 659, 523  // Like a diamond in the sky
+    NOTE_C4, NOTE_C4, NOTE_G4, NOTE_G4, NOTE_A4, NOTE_A4, NOTE_G4, // Twinkle, twinkle, little star
+    NOTE_F4, NOTE_F4, NOTE_E4, NOTE_E4, NOTE_D4, NOTE_D4, NOTE_C4, // How I wonder what you are
+    NOTE_G4, NOTE_G4, NOTE_F4, NOTE_F4, NOTE_E4, NOTE_E4, NOTE_D4, // Up above the world so high
+    NOTE_G4, NOTE_G4, NOTE_F4, NOTE_F4, NOTE_E4, NOTE_E4, NOTE_D4, // Like a diamond in the sky
+    NOTE_C4, NOTE_C4, NOTE_G4, NOTE_G4, NOTE_A4, NOTE_A4, NOTE_G4, // Twinkle, twinkle, little star
+    NOTE_F4, NOTE_F4, NOTE_E4, NOTE_E4, NOTE_D4, NOTE_D4, NOTE_C4  // How I wonder what you are
 };
 
 // Durations for each note (in milliseconds)
 uint32_t durationsA[] = {
-    250, 250, 500, 500, 500, 500, 1000, // Twinkle, twinkle, little star
-    250, 250, 500, 500, 500, 500, 1000, // How I wonder what you are
-    250, 250, 500, 500, 500, 500, 1000, // Up above the world so high
-    250, 250, 500, 500, 500, 500, 1000  // Like a diamond in the sky
+    500, 500, 500, 500, 500, 500, 1000, // Twinkle, twinkle, little star
+    500, 500, 500, 500, 500, 500, 1000, // How I wonder what you are
+    500, 500, 500, 500, 500, 500, 1000, // Up above the world so high
+    500, 500, 500, 500, 500, 500, 1000, // Like a diamond in the sky
+    500, 500, 500, 500, 500, 500, 1000, // Twinkle, twinkle, little star
+    500, 500, 500, 500, 500, 500, 1000  // How I wonder what you are
 };
 
 
 
 // Melody B (Jingle Bells - main theme)
 uint32_t melodyB[] = {
-    659, 659, 659, // Jingle bells
-    659, 659, 659, // Jingle bells
-    659, 784, 523, 587, 659, // Jingle all the way
+    NOTE_E4, NOTE_E4, NOTE_E4, // Jingle bells
+    NOTE_E4, NOTE_E4, NOTE_E4, // Jingle bells
+    NOTE_E4, NOTE_G4, NOTE_D4, NOTE_E4, NOTE_E4, // Jingle all the way
+    NOTE_F4, NOTE_F4, NOTE_F4, NOTE_F4, NOTE_F4, NOTE_E4, NOTE_E4,
+    NOTE_E4, NOTE_E4, NOTE_D4, NOTE_D4, NOTE_E4, NOTE_D4, NOTE_G4
 };
 
 // Durations for each note (in milliseconds)
 uint32_t durationsB[] = {
-    300, 300, 600, // Jingle bells
-    300, 300, 600, // Jingle bells
-    300, 300, 300, 300, 800, // Jingle all the way
+    500, 500, 1000,
+		500, 500, 1000,
+		500, 500, 500, 500, 2000, // First segment
+    500, 500, 500, 500, 500, 500, 500,
+		1000, 500, 500, 500, 500, 1000, 1000
 };
 
 uint32_t melodyC[]  = { 
@@ -74,6 +82,21 @@ uint32_t durationsC[]  = {
   3, 3, 3, 1, 2, 2, 2, 4, 8, 4
 };
 
+// Melody D (Never Gonna Give You Up) simplified and increased by two octaves
+uint32_t melodyD[] = {
+    NOTE_C6, NOTE_E6, NOTE_E6, NOTE_D6, NOTE_C6, NOTE_E6, NOTE_C6, NOTE_D6, // "We're no strangers to love"
+    NOTE_E6, NOTE_E6, NOTE_D6, NOTE_C6, NOTE_E6, NOTE_C6, NOTE_D6, NOTE_C6, // "You know the rules and so do I"
+    NOTE_C6, NOTE_E6, NOTE_E6, NOTE_D6, NOTE_C6, NOTE_E6, NOTE_C6, NOTE_D6, // "A full commitment's what I'm thinking of"
+    NOTE_E6, NOTE_E6, NOTE_D6, NOTE_C6, NOTE_E6, NOTE_C6, NOTE_D6, NOTE_C6, // "You wouldn't get this from any other guy"
+};
+
+// Durations for each note (in milliseconds)
+uint32_t durationsD[] = {
+    500, 500, 500, 500, 500, 500, 500, 500, // "We're no strangers to love"
+    500, 500, 500, 500, 500, 500, 500, 500, // "You know the rules and so do I"
+    500, 500, 500, 500, 500, 500, 500, 500, // "A full commitment's what I'm thinking of"
+    500, 500, 500, 500, 500, 500, 500, 500  // "You wouldn't get this from any other guy"
+};
 
 void initBuzzer(void) {
     // Enable clock for Port A and TPM2 modules
@@ -85,16 +108,17 @@ void initBuzzer(void) {
     PORTA->PCR[2] |= PORT_PCR_MUX(3);         // Set MUX to 3 for TPM2_CH1 function
 
     // Set TPM clock source to MCGFLLCLK or an alternative clock source
+		SIM->SOPT2 &= ~SIM_SOPT2_TPMSRC_MASK;
     SIM->SOPT2 |= SIM_SOPT2_TPMSRC(1);        // Set TPM clock source to 48 MHz MCGFLLCLK
 
     // Set TPM2 to up-counting mode and configure prescaler
+		TPM2->SC &= ~TPM_SC_PS_MASK;
     TPM2->SC = TPM_SC_PS(7);                  // Set prescaler to 128
 
     // Set TPM2 to edge-aligned PWM mode with high-true pulses
     TPM2_C1SC &= ~((TPM_CnSC_ELSB_MASK | TPM_CnSC_ELSA_MASK | TPM_CnSC_MSB_MASK | TPM_CnSC_MSA_MASK));
     TPM2_C1SC |= (TPM_CnSC_MSB_MASK | TPM_CnSC_ELSB_MASK);  // Edge-aligned PWM with high-true pulses
 }
-
 
 void setPWMTone(uint32_t frequency) {
     if (frequency == 0) {
@@ -109,7 +133,7 @@ void setPWMTone(uint32_t frequency) {
     TPM2->MOD = modValue;
 
     // Set duty cycle to 50% (adjustable as needed)
-    TPM2_C1V = modValue * 0.5;
+    TPM2_C1V = modValue*0.05;
 
     // Start TPM2 if not already started
     TPM2->SC |= TPM_SC_CMOD(1); // Start TPM2 with the selected clock
@@ -123,7 +147,8 @@ void stopBuzzer(void) {
 void playMelodyA(void) {
     uint32_t numNotes = sizeof(melodyA) / sizeof(melodyA[0]); // Number of notes in the melody
 		for (uint32_t i = 0; i < numNotes; i++) {
-			setPWMTone(melodyA[i]);             // Set frequency
+			osEventFlagsWait(runEndEvent,0x01,osFlagsNoClear,osWaitForever);
+			setPWMTone(melodyA[i]*4);             // Set frequency
 			osDelay(durationsA[i]);             // Delay for the note's duration
 			stopBuzzer();                          // Stop the tone
 			osDelay(100);                       // Short gap between notes
@@ -134,7 +159,7 @@ void playMelodyB(void) {
 		uint32_t numNotes = sizeof(melodyB) / sizeof(melodyB[0]); // Number of notes in the melody
 		for (uint32_t i = 0; i < numNotes; i++) {
 			osEventFlagsWait(runEndEvent,0x02,osFlagsNoClear,osWaitForever);
-			setPWMTone(melodyB[i]);             // Set frequency
+			setPWMTone(melodyB[i]*4);             // Set frequency
 			osDelay(durationsB[i]);             // Delay for the note's duration
 			stopBuzzer();                          // Stop the tone
 			osDelay(100);                       // Short gap between notes
@@ -151,3 +176,15 @@ void playMelodyC(void) {
 			osDelay(150);                       // Short gap between notes
 		}
 }
+
+void playMelodyD(void) {
+		uint32_t numNotes = sizeof(melodyD) / sizeof(melodyD[0]); // Number of notes in the melody
+		for (uint32_t i = 0; i < numNotes; i++) {
+			osEventFlagsWait(runEndEvent,0x01,osFlagsNoClear,osWaitForever);
+			setPWMTone(melodyD[i]);             // Set frequency
+			osDelay(durationsD[i]);             // Delay for the note's duration
+			stopBuzzer();                          // Stop the tone
+			osDelay(150);                       // Short gap between notes
+		}
+}
+
