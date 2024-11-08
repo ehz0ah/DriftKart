@@ -6,7 +6,7 @@
 
 ControllerPtr myControllers[BP32_MAX_GAMEPADS];
 
-const uint8_t ALLOWED_BT_ADDRESS[] = {0x44, 0x16, 0x22, 0x94, 0x4E, 0xCD};
+const uint8_t ALLOWED_BT_ADDRESS[] = {0x84, 0x30, 0x95, 0x39, 0x23, 0xA5};
 
 bool isBTAddressAllowed(const uint8_t* btAddr) {
     for (int i = 0; i < 6; i++) {
@@ -85,64 +85,65 @@ void dumpGamepad(ControllerPtr ctl) {
 
 void processGamepad(ControllerPtr ctl) {
     dumpGamepad(ctl);  // Print out control values
-    
+
     // Prepare to send data via UART
     int16_t x = ctl->axisX();
-    int16_t y = ctl->axisY();
+    int16_t y = -ctl->axisY();  
     uint8_t throttle = processThrottle(ctl->throttle());
-    const int16_t threshold = 20;
     
     uint8_t command = 0x00;
 
-    // Processing of data is done here
-    if (x > threshold) {  // Forward condition here For eg. -100 < x < 100 && -100 < y < 100 
-      command |= 0x01;
-      Serial.println("FORWARD");
-    } else if (x < -threshold) {
-      command |= 0x02;
-      Serial.println("BACKWARD");
-    } else if (y > threshold) {
-      command |= 0x03;
-      Serial.println("FAR LEFT");
-    } else if (y < -threshold) {
-      command |= 0x04;
-      Serial.println("FAR RIGHT");
-    } else if (false) {
-      command |= 0x05;
-      Serial.println("LEFT 1");
-    } else if (false) {
-      command |= 0x06;
-      Serial.println("LEFT 2");
-    } else if (false) {
-      command |= 0x07;
-      Serial.println("RIGHT 1");
-    } else if (false) {    // Up till here need to configure conditions
-      command |= 0x08;
-      Serial.println("RIGHT 2");
-    } else if (ctl->l1()) {
-      command |= 0x09;
-      Serial.println("LEFT CURVE");
-    } else if (ctl->r1()) {
-      command |= 0x0A;
-      Serial.println("RIGHT CURVE");
-    } else if (ctl->dpad() == DPAD_LEFT) {
-      command |= 0x0B;
-      Serial.println("SPIN LEFT ON THE SPOT");
-    } else if (ctl->dpad() == DPAD_RIGHT) {
-      command |= 0x0C;
-      Serial.println("SPIN RIGHT ON THE SPOT");
-    } else if (ctl->a()) {  // Bottom button
-      command |= 0x0D;
-      Serial.println("RUN END");
+    // Define command regions based on x and y values
+    if (y > 256 && abs(x) < 128) {              
+        command |= 0x01;
+        Serial.println("FORWARD");
+    } else if (y < -384 && abs(x) < 256) {    
+        command |= 0x02;
+        Serial.println("REVERSE");
+    } else if (y > 128 && x < -128 && x > -416) { // Left Turn 1 (Gentle Left, 0.8 diff)
+        command |= 0x03;
+        Serial.println("FORWARD GENTLE LEFT TURN");
+    } else if (y > 128 && x > 128 && x < 416) {   // Right Turn 1 (Gentle Right, 0.8 diff)
+        command |= 0x04;
+        Serial.println("FORWARD GENTLE RIGHT TURN");
+    } else if (y > 128 && x < -416) {             // Left Turn 2 (Moderate Left, 0.5 diff)
+        command |= 0x05;
+        Serial.println("FORWARD MODERATE LEFT TURN");
+    } else if (y > 128 && x > 416) {              // Right Turn 2 (Moderate Right, 0.5 diff)
+        command |= 0x06;
+        Serial.println("FORWARD MODERATE RIGHT TURN");
+    } else if (y > -384 && x < -384) {              // Left Turn 3 (Sharp Left, 0.3 diff)
+        command |= 0x07;
+        Serial.println("FORWARD SHARP LEFT TURN");
+    } else if (y > -384 && x > 384) {               // Right Turn 3 (Sharp Right, 0.3 diff)
+        command |= 0x08;
+        Serial.println("FORWARD SHARP RIGHT TURN");
+    } else if (ctl->l1()) {                       // Hard Left Curve
+        command |= 0x09;
+        Serial.println("LEFT CURVE");
+    } else if (ctl->r1()) {                       // Hard Right Curve
+        command |= 0x0A;
+        Serial.println("RIGHT CURVE");
+    } else if (ctl->dpad() == DPAD_LEFT) {        // Spin Left
+        command |= 0x0B;
+        Serial.println("SPIN LEFT ON THE SPOT");
+    } else if (ctl->dpad() == DPAD_RIGHT) {       // Spin Right
+        command |= 0x0C;
+        Serial.println("SPIN RIGHT ON THE SPOT");
+    } else if (ctl->a()) {                        // Run End
+        command |= 0x0D;
+        Serial.println("RUN END");
     } else {
-      Serial.println("NEUTRAL");
+        Serial.println("NEUTRAL");
     }
 
+    // Include throttle in command if active
     if (throttle) {
-      command |= (1 << 4);
-      Serial.println("Throttle pressed");
+        command |= (1 << 4);
+        Serial.println("Throttle pressed");
     }
 
+    // Send the command via UART
     Serial2.write(command);
     Serial.printf("Command sent: 0x%02X\n", command);
 }
