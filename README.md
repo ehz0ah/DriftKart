@@ -2,6 +2,8 @@
 
 This project demonstrates the creation of a robot controlled by a PS4 controller using an **ESP32-DevKitC-S1** and an **NXP FRDM-KL25Z** microcontroller, running on **Keil RTX 5 RTOS**. The robot can move, play tunes, shine LEDs, and perform concurrent tasks using multi-threading.
 
+Check out [this](https://www.youtube.com/watch?v=uCeixj1EkN8) video!
+
 ## Overview
 
 ### Components:
